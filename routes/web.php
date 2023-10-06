@@ -10,7 +10,7 @@ use App\Http\Controllers\auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\MemberController;
 use App\Http\Controllers\Backend\FamilyController;
-
+use App\Http\Controllers\Backend\ItemController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -25,16 +25,8 @@ use App\Http\Controllers\Backend\FamilyController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
 Route::get('/dashboard', function () {
-
     return view('index');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
 Route::get('/logout', [AdminController::class, 'AdminLogoutPage'])->name('admin.logout.page');
@@ -44,16 +36,13 @@ Route::get('/guatemala.json', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('change.password');
     Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
 
-
     /// Usuarios rutas
     Route::controller(UserController::class)->group(function () {
-
         Route::get('/all/user', 'AllUser')->name('all.user');
         Route::get('/view/user/{id}', 'ViewUser')->name('view.user');
         Route::get('/add/user', 'AddUser', 'mostrarGuatemala')->name('add.user');
@@ -63,9 +52,26 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete/user/{id}', 'DeleteUser')->name('delete.user');
     });
 
+    /// Editar usuario rutas
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'edit')->name('profile.edit');
+        Route::patch('/profile', 'update')->name('profile.update');
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
+    });
+
+    // Items Rutas
+    Route::controller(ItemController::class)->group(function () {
+        Route::get('/all/item', 'AllItem')->name('all.item');
+        Route::get('/view/item/{id}', 'ViewUser')->name('view.item');
+        Route::get('/add/item', 'AddItem')->name('add.item');
+        Route::post('/store/item', 'StoreItem')->name('item.store');
+        Route::get('/edit/item/{id}', 'EditItem')->name('edit.item');
+        Route::post('/update/item', 'UpdateItem')->name('item.update');
+        Route::get('/delete/item/{id}', 'DeleteItem')->name('delete.item');
+    });
+
     /// Familias rutas
     Route::controller(FamilyController::class)->group(function () {
-
         Route::get('/all/family', 'AllFamily')->name('all.family');
         Route::get('/view/family/{id}', 'ViewFamily')->name('view.family');
         Route::get('/add/family', 'AddFamily')->name('add.family');
@@ -77,7 +83,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Participantes rutas
     Route::controller(MemberController::class)->group(function () {
-
         Route::get('/all/member', 'AllMember')->name('all.member');
         Route::get('/add/member', 'AddMember')->name('add.member');
         Route::get('/view/member/{id}', 'ViewMember')->name('view.member');
@@ -89,7 +94,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Programa escolar rutas
     Route::controller(ScolarshipController::class)->group(function () {
-
         Route::get('/all/scholarship', 'AllScolarship')->name('all.scholarship');
         Route::get('/add/scholarship', 'AddScolarship')->name('add.scholarship');
         Route::get('/view/scholarship/{id}', 'ViewScholarship')->name('view.scholarship');
@@ -101,7 +105,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Categorias productos rutas
     Route::controller(CartegoryController::class)->group(function () {
-
         Route::get('/all/cartegory', 'AllCartegory')->name('all.cartegory');
         Route::get('/add/cartegory', 'AddCartegory')->name('add.cartegory');
         Route::get('/view/cartegory/{id}', 'ViewCartegory')->name('view.cartegory');
@@ -110,10 +113,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/cartegory', 'UpdateCartegory')->name('cartegory.update');
         Route::get('/delete/cartegory/{id}', 'DeleteCartegory')->name('delete.cartegory');
     });
-    
+
     /// Productos rutas
     Route::controller(ProductController::class)->group(function () {
-
         Route::get('/all/product', 'AllProduct')->name('all.product');
         Route::get('/add/product', 'AddProduct')->name('add.product');
         Route::get('/view/product/{id}', 'ViewProduct')->name('view.product');
@@ -125,7 +127,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Talleres rutas
     Route::controller(WorkshopController::class)->group(function () {
-
         Route::get('/all/workshop', 'AllWorkshop')->name('all.workshop');
         Route::get('/add/workshop', 'AddWorkshop')->name('add.workshop');
         Route::get('/view/workshop/{id}', 'ViewWorkshop')->name('view.workshop');
@@ -137,7 +138,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Usuarios_Programas rutas
     Route::controller(UserProgramController::class)->group(function () {
-
         Route::get('/all/userprogram', 'AllUserPrograms')->name('all.userprogram');
         Route::get('/add/userprogram', 'AddUserPrograms')->name('add.userprogram');
         Route::get('/view/userprogram/{id}', 'ViewUserPrograms')->name('view.userprogram');
@@ -149,7 +149,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Ayudas rutas
     Route::controller(HelpController::class)->group(function () {
-
         Route::get('/all/help', 'AllHelp')->name('all.help');
         Route::get('/add/help', 'AddHelp')->name('add.help');
         Route::get('/view/help/{id}', 'ViewHelp')->name('view.help');
@@ -161,7 +160,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Visitas rutas
     Route::controller(VisitController::class)->group(function () {
-
         Route::get('/all/visit', 'AllVisit')->name('all.visit');
         Route::get('/add/visit', 'AddVisit')->name('add.visit');
         Route::get('/view/visit/{id}', 'ViewVisit')->name('view.visit');
@@ -173,7 +171,6 @@ Route::middleware(['auth'])->group(function () {
 
     /// Visitas rutas
     Route::controller(RegisterController::class)->group(function () {
-
         Route::get('/all/register', 'AllRegister')->name('all.register');
         Route::get('/add/register', 'AddRegister')->name('add.register');
         Route::get('/view/register/{id}', 'ViewRegister')->name('view.register');
@@ -182,5 +179,4 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/register', 'UpdateRegister')->name('register.update');
         Route::get('/delete/register/{id}', 'DeleteRegister')->name('delete.register');
     });
-
 }); // End Middleware 
