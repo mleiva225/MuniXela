@@ -40,7 +40,7 @@
 {{ $salutation }}
 @else
 @lang('Saludos'),<br>
-{{ config('Colectivo Vida Digna') }}
+{{ config('Grupo Dinamita') }}
 @endif
 
 {{-- Subcopy --}}
