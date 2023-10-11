@@ -44,10 +44,10 @@
                     <div class="collapse" id="sidebarfamily">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('all.family') }}">Lista</a>
+                                <a href="{{ route('all.item') }}">Lista</a>
                             </li>
                             <li>
-                                <a href="{{ route('add.family') }}">Agregar nueva</a>
+                                <a href="{{ route('add.item') }}">Agregar item</a>
                             </li>
                         </ul>
                     </div>
