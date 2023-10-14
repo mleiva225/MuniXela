@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store/item', 'StoreItem')->name('item.store');
         Route::get('/edit/item/{id}', 'EditItem')->name('edit.item');
         Route::post('/update/item', 'UpdateItem')->name('item.update');
-        Route::get('/delete/item/{id}', 'DeleteItem')->name('delete.item');
+        Route::get('/delete/item/{id}', 'DeleteItem')->name('item.delete');
     });
 
     /// Familias rutas
