@@ -27,6 +27,11 @@
             <div class="col-lg-8 col-xl-12">
                 <div class="card">
                     <div class="card-body">
+                        @if(Session::has('notification'))
+                        <div class="alert alert-{{ Session::get('notification.alert-type') }}">
+                            {{ Session::get('notification.message') }}
+                        </div>
+                        @endif
 
                         <!-- end timeline content-->
                         <div class="tab-pane" id="settings">
@@ -119,7 +124,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="description" class="form-label">{{ __("description") }}</label>
-                                            <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}">
+                                            <textarea type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}"></textarea>
                                             @error('description')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
@@ -134,11 +139,6 @@
                             </form>
                         </div>
                         <!-- end settings content-->
-                        @if(Session::has('notification'))
-                        <div class="alert alert-{{ Session::get('notification.alert-type') }}">
-                            {{ Session::get('notification.message') }}
-                        </div>
-                        @endif
 
                     </div>
                 </div> <!-- end card-->

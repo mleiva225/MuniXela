@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
     // Items Rutas
     Route::controller(ItemController::class)->group(function () {
         Route::get('/all/item', 'AllItem')->name('all.item');
-        Route::get('/view/item/{id}', 'ViewUser')->name('view.item');
+        Route::get('/view/item/{id}', 'ViewItem')->name('view.item');
         Route::get('/add/item', 'AddItem')->name('add.item');
         Route::post('/store/item', 'StoreItem')->name('item.store');
         Route::get('/edit/item/{id}', 'EditItem')->name('edit.item');

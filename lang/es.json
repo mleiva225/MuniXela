@@ -84,10 +84,15 @@
     "updated-at": "Fecha de última actualización",
     "description": "Descripción",
     "new-item": "Nuevo Item",
+    "edit-item": "Editar Item",
+    "view-item-:attribute": "Item - :attribute",
+    "edit-item-:attribute": "Editar Item - :attribute",
     "items": "Items",
     "item": "Item",
     "no.": "No.",
     ":model-insert-success": ":model guardado con éxito",
     ":model-update-success": ":model actualizado con éxito",
-    ":model-delete-success": ":model eliminado con éxito"
+    ":model-delete-success": ":model eliminado con éxito",
+    "format-date-desc": "El formato de fecha es: Año-mes-día",
+    "format-datetime-desc": "El formato de fecha es: Año-mes-día hora"
 }
