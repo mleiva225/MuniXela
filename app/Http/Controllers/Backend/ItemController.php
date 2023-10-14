@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Item\StoreItemRequest;
 
 class ItemController extends Controller
 {
+    /** ============================== VISTAS ============================== */
+
     public function AllItem()
     {
         $items = Item::all();
@@ -15,48 +18,72 @@ class ItemController extends Controller
         return view('backend.item.all_item', compact('items'));
     }
 
-    /** =============== NUEVO ITEM =============== */
     public function AddItem()
     {
-        return view('backend.item.add_item');
-    } // End Method 
+        $fecha_actual = date('Y-m-d');
 
-    /** =============== NUEVO ITEM =============== */
-    public function StoreItem(Request $request)
-    {
-        $request->validate(['name' => ['required', 'string', 'max:50'],]);
-
-        Item::insert([
-            'nombre' => $request->name,
-        ]);
-
-        $notification = array(
-            'message' => 'user Inserted Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('all.item')->with($notification);
+        return view('backend.item.add_item', compact('fecha_actual'));
     }
 
-    /** =============== EDICIÓN DE ITEM =============== */
-    public function Edituser($id)
+    public function EditItem($id)
     {
         $item = Item::findOrFail($id);
         return view('backend.item.edit_item', compact('item'));
     }
 
-    public function Updateuser(Request $request)
+    /** ============================== ACCIONES ============================== */
+
+    public function StoreItem(StoreItemRequest $request)
+    {
+        Item::create([
+            'name' => $request->name,
+            'code' => $request->code,
+            'series' => $request->series,
+            'quantity' => $request->quantity,
+            'sicoin_gl' => $request->sicoin_gl,
+            'description' => $request->description,
+            'observations' => $request->observations,
+        ]);
+
+        $notification = array(
+            'message' => __(':model-insert-success', ['model' => __('item')]),
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.item')->with('notification', $notification);
+    }
+
+    public function UpdateItem(Request $request)
     {
         $item_id = $request->id;
 
         Item::findOrFail($item_id)->update([
-            'nombre' => $request->name
+            'name' => $request->name,
+            'code' => $request->code,
+            'series' => $request->series,
+            'quantity' => $request->quantity,
+            'sicoin_gl' => $request->sicoin_gl,
+            'description' => $request->description,
+            'observations' => $request->observations,
         ]);
 
         $notification = array(
-            'message' => 'item Updated Successfully',
+            'message' => __(':model-update-success', ['model' => __('item')]),
             'alert-type' => 'success'
         );
-        return redirect()->route('all.item')->with($notification);
-    } // End Method 
+
+        return redirect()->route('all.item')->with('notification', $notification);
+    }
+
+    public function DeleteItem($id)
+    {
+        Item::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => __(':model-delete-success', ['model' => __('item')]),
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.item')->with('notification', $notification);
+    }
 }
