@@ -18,6 +18,13 @@ class ItemController extends Controller
         return view('backend.item.all_item', compact('items'));
     }
 
+    public function ViewItem($id)
+    {
+        $item = Item::findOrFail($id);
+
+        return view('backend.item.view_item', compact('item'));
+    }
+
     public function AddItem()
     {
         $fecha_actual = date('Y-m-d');
@@ -53,7 +60,7 @@ class ItemController extends Controller
         return redirect()->route('all.item')->with('notification', $notification);
     }
 
-    public function UpdateItem(Request $request)
+    public function UpdateItem(StoreItemRequest $request)
     {
         $item_id = $request->id;
 
