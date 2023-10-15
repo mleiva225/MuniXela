@@ -58,9 +58,7 @@ class AdminController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->lastname = $request->lastname;
-        $data->gender = $request->gender;
         $data->birthdate = $request->birthdate;
-        $data-> ethnicity = $request->ethnicity;
         $data-> address = $request->address;
         $data-> state = $request->state;
         $data-> city = $request->city;

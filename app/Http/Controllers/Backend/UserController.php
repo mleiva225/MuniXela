@@ -47,30 +47,45 @@ class UserController extends Controller
     public function Adduser()
     {
         $jsonFile = public_path('/guatemala.json'); // Ruta al archivo JSON, ajusta la ubicación según corresponda
-
+        $jsondependence = public_path('/dependencia.json'); // Ruta al archivo JSON, ajusta la ubicación según corresponda
+        
         if (file_exists($jsonFile)) {
             $datosGuatemala = json_decode(file_get_contents($jsonFile), true);
         } else {
             // Manejar la situación si el archivo JSON no existe
             $datosGuatemala = [];
         }
-        return view('backend.user.add_user', compact('datosGuatemala'));
+
+        if (file_exists($jsondependence)) {
+            $datosDependencia = json_decode(file_get_contents($jsondependence), true);
+        } else {
+            // Manejar la situación si el archivo JSON no existe
+            $datosDependencia = [];
+        }
+
+        return view('backend.user.add_user', compact('datosGuatemala', 'datosDependencia'));
     } // End Method 
 
     public function Storeuser(Request $request)
     {
+
         $validateData = $request->validate(
             [
                 'name' => ['required', 'string', 'max:50'],
                 'lastname' => ['required', 'string', 'max:50'],
                 'phone' => ['required', 'string', 'max:20'],
                 'email' => ['required', 'string', 'email', 'max:75', 'unique:' . User::class],
-                'gender' => ['required', 'string', 'max:50'],
-                'birthdate' => ['required', 'date', 'date_format:Y-m-d'],
-                'ethnicity' => ['required', 'string', 'max:50'],
+                'phone' => ['required', 'string', 'max:20'],
+                'position' => ['required', 'string', 'max:255'],
+                'dependence' => ['required', 'string', 'max:255'],
+                'row' => ['required', 'string', 'max:255'],
+                'code' => ['required', 'string', 'max:255'],
                 'address' => ['required', 'string', 'max:50'],
                 'state' => ['required', 'string', 'max:50'],
                 'city' => ['required', 'string', 'max:50'],
+                'birthdate' => ['required', 'date', 'date_format:Y-m-d'],
+                'admin' => ['required'],
+                'password' => ['required'],
             ]
         );
 
@@ -87,12 +102,16 @@ class UserController extends Controller
             'lastname' => $request->lastname,
             'email' => $request->email,
             'phone' => $request->phone,
-            'gender' => $request->gender,
-            'birthdate' => $request->birthdate,
-            'ethnicity' => $request->ethnicity,
+            'position' => $request->position,
+            'dependence' => $request->dependence,
+            'row' => $request->row,
+            'code' => $request->code,
             'address' => $request->address,
             'state' => $request->state,
             'city' => $request->city,
+            'birthdate' => $request->birthdate,
+            'status' => '1', 
+            'admin' => $request->admin,
             'photo' => $save_url,
             'password' => Hash::make($request->password),
             'created_at' => Carbon::now(),
@@ -109,6 +128,8 @@ class UserController extends Controller
     {
 
         $jsonFile = public_path('/guatemala.json'); // Ruta al archivo JSON, ajusta la ubicación según corresponda
+        $jsondependence = public_path('/dependencia.json'); // Ruta al archivo JSON, ajusta la ubicación según corresponda
+        
 
         if (file_exists($jsonFile)) {
             $datosGuatemala = json_decode(file_get_contents($jsonFile), true);
@@ -117,8 +138,16 @@ class UserController extends Controller
             $datosGuatemala = [];
         }
 
+        if (file_exists($jsondependence)) {
+            $datosDependencia = json_decode(file_get_contents($jsondependence), true);
+        } else {
+            // Manejar la situación si el archivo JSON no existe
+            $datosDependencia = [];
+        }
+
+
         $user = user::findOrFail($id);
-        return view('backend.user.edit_user', compact('datosGuatemala','user'));
+        return view('backend.user.edit_user', compact('datosGuatemala','user', 'datosDependencia'));
     }
 
     public function Updateuser(Request $request)
@@ -134,14 +163,18 @@ class UserController extends Controller
                 'lastname' => $request->lastname,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'gender' => $request->gender,
-                'birthdate' => $request->birthdate,
+                'position' => $request->position,
+                'dependence' => $request->dependence,
+                'row' => $request->row,
+                'code' => $request->code,
                 'address' => $request->address,
-                'ethnicity' => $request->ethnicity,
                 'state' => $request->state,
                 'city' => $request->city,
-                'photo' => $save_url,
-                'created_at' => Carbon::now(),
+                'birthdate' => $request->birthdate,
+                'status' => $request->status,
+                'admin' => $request->admin,
+                'photo' => $name_gen,
+                'updated_at' => Carbon::now(),
             ]);
             $notification = array(
                 'message' => 'user Updated Successfully',
@@ -154,13 +187,17 @@ class UserController extends Controller
                 'lastname' => $request->lastname,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'gender' => $request->gender,
-                'birthdate' => $request->birthdate,
-                'ethnicity' => $request->ethnicity,
+                'position' => $request->position,
+                'dependence' => $request->dependence,
+                'row' => $request->row,
+                'code' => $request->code,
                 'address' => $request->address,
                 'state' => $request->state,
                 'city' => $request->city,
-                'created_at' => Carbon::now(),
+                'birthdate' => $request->birthdate,
+                'status' => $request->status,
+                'admin' => $request->admin,
+                'updated_at' => Carbon::now(),
             ]);
             $notification = array(
                 'message' => 'user Updated Successfully',
@@ -203,8 +240,26 @@ class UserController extends Controller
 
     public function Viewuser($id)
     {
+
+        $jsonFile = public_path('/guatemala.json'); // Ruta al archivo JSON, ajusta la ubicación según corresponda
+        $jsondependence = public_path('/dependencia.json'); // Ruta al archivo JSON, ajusta la ubicación según corresponda
+        
+        if (file_exists($jsonFile)) {
+            $datosGuatemala = json_decode(file_get_contents($jsonFile), true);
+        } else {
+            // Manejar la situación si el archivo JSON no existe
+            $datosGuatemala = [];
+        }
+
+        if (file_exists($jsondependence)) {
+            $datosDependencia = json_decode(file_get_contents($jsondependence), true);
+        } else {
+            // Manejar la situación si el archivo JSON no existe
+            $datosDependencia = [];
+        }
+
         $user = user::findOrFail($id);
-        return view('backend.user.view_user', compact('user'));
+        return view('backend.user.view_user', compact('user', 'datosDependencia', 'datosGuatemala'));
     } // End Method 
 
 }

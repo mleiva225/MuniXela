@@ -81,24 +81,33 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="birthdate" class="form-label">Fecha Nacimiento*</label>
-                                            <input type="date" name="birthdate" class="form-control @error('birthdate') is-invalid @enderror" value="{{ $user->birthdate }}">
-                                            @error('birthdate')
-                                            <span class="text-danger">{{ $message }}</span>
+                                            <label for="position" class="form-label">Puesto*</label>
+                                            <input type="text" name="position" class="form-control @error('position') is-invalid @enderror"  value="{{ $user->position }}">
+                                            @error('position')
+                                            <span class="text-danger"> {{ $message }} </span>
                                             @enderror
                                         </div>
                                     </div>
 
+
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="gender" class="form-label">genero*</label>
-                                            <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="example-select">
-                                                <option selected="">Indique el genero</option>
-                                                <option value="Masculino" {{ $user->gender === 'Masculino' ? 'selected' : '' }}>Masculino</option>
-                                                <option value="Femenino" {{ $user->gender === 'Femenino' ? 'selected' : '' }}>Femenino</option>
-                                                <option value="Otro" {{ $user->gender === 'Otro' ? 'selected' : '' }}>Prefiero no decirlo</option>
+                                            <label for="dependence" class="form-label">Dependencia*</label>
+                                            <select name="dependence" id="dependence" class="form-select">
+                                                <option value="">Selecciona una dependencia</option>
+                                                @foreach($datosDependencia['Dependencias'] as $dependencia)
+                                                    <option value="{{ $dependencia }}" @if($user->dependence == $dependencia) selected @endif>{{ $dependencia }}</option>
+                                                @endforeach
                                             </select>
-                                            @error('gender')
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="row" class="form-label">Renglon*</label>
+                                            <input type="text" name="row" class="form-control @error('row') is-invalid @enderror"  value="{{ $user->row }}">
+                                            @error('row')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
                                         </div>
@@ -106,15 +115,9 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="ethnicity" class="form-label">Etnia</label>
-                                            <select name="ethnicity" class="form-select @error('ethnicity') is-invalid @enderror" id="example-select">
-                                                <option selected="">Indique la etnia</option>
-                                                <option value="Xinka" {{ $user->ethnicity === 'Xinka' ? 'selected' : '' }}>Xinka</option>
-                                                <option value="Garífuna" {{ $user->ethnicity === 'Garífuna' ? 'selected' : '' }}>Garífuna</option>
-                                                <option value="Ladino" {{ $user->ethnicity === 'Ladino' ? 'selected' : '' }}>Ladino</option>
-                                                <option value="Maya" {{ $user->ethnicity === 'Maya' ? 'selected' : '' }}>Maya</option>
-                                            </select>
-                                            @error('ethnicity')
+                                            <label for="code" class="form-label">Codigo*</label>
+                                            <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" value="{{ $user->code }}">
+                                            @error('code')
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
                                         </div>
@@ -167,6 +170,44 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="birthdate" class="form-label">Fecha Nacimiento*</label>
+                                            <input type="date" name="birthdate" class="form-control @error('birthdate') is-invalid @enderror" value="{{ $user->birthdate }}">
+                                            @error('birthdate')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="admin" class="form-label">Administrador*</label>
+                                            <select name="admin" class="form-select @error('admin') is-invalid @enderror" id="admin">
+                                                <option value="">¿El usuario es administrador?</option>
+                                                <option value="0" @if($user->admin == 0) selected @endif>No</option>
+                                                <option value="1" @if($user->admin == 1) selected @endif>Sí</option>
+                                            </select>
+                                            @error('admin')
+                                            <span class="text-danger"> {{ $message }} </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Activo*</label>
+                                            <select name="status" class="form-select @error('status') is-invalid @enderror" id="estado">
+                                                <option value="">¿El usuario esta activo?</option>
+                                                <option value="0" @if($user->status == 0) selected @endif>No</option>
+                                                <option value="1" @if($user->status == 1) selected @endif>Sí</option>
+                                            </select>
+                                            @error('status')
+                                            <span class="text-danger"> {{ $message }} </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="example-fileinput" class="form-label">Imagen</label>
@@ -175,14 +216,14 @@
                                             <span class="text-danger"> {{ $message }} </span>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> <!-- end col -->
 
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="example-fileinput" class="form-label"> </label>
-                                            <img src="{{ asset('upload/admin_image/' . $user->photo ) }}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                                            <img id="showImage" src="{{ url('upload/no_image.jpg') }}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
                                         </div>
-                                    </div>
+                                    </div> <!-- end col -->
 
                                 </div>
 
