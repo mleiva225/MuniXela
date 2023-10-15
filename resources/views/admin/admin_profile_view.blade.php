@@ -97,38 +97,6 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="ethnicity" class="form-label">Etnia</label>
-                                            <select name="ethnicity" class="form-select @error('ethnicity') is-invalid @enderror" id="example-select">
-                                                <option selected="">Indique la etnia</option>
-                                                <option value="Xinka" {{ $adminData->ethnicity === 'Xinka' ? 'selected' : '' }}>Xinka</option>
-                                                <option value="Garífuna" {{ $adminData->ethnicity === 'Garífuna' ? 'selected' : '' }}>Garífuna</option>
-                                                <option value="Ladino" {{ $adminData->ethnicity === 'Ladino' ? 'selected' : '' }}>Ladino</option>
-                                                <option value="Maya" {{ $adminData->ethnicity === 'Maya' ? 'selected' : '' }}>Maya</option>
-                                            </select>
-                                            @error('ethnicity')
-                                            <span class="text-danger"> {{ $message }} </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="gender" class="form-label">genero*</label>
-                                            <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="example-select">
-                                                <option selected="">Indique el genero</option>
-                                                <option value="Masculino" {{ $adminData->gender === 'Masculino' ? 'selected' : '' }}>Masculino</option>
-                                                <option value="Femenino" {{ $adminData->gender === 'Femenino' ? 'selected' : '' }}>Femenino</option>
-                                                <option value="Otro" {{ $adminData->gender === 'Otro' ? 'selected' : '' }}>Prefiero no decirlo</option>
-                                            </select>
-                                            @error('gender')
-                                            <span class="text-danger"> {{ $message }} </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
                                             <label for="birthdate" class="form-label">Fecha Nacimiento</label>
                                             <input type="date" name="birthdate" class="form-control" id="birthdate" value="{{ $adminData->birthdate }}">
                                         </div>
