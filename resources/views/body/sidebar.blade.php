@@ -34,10 +34,10 @@
                 </li>
 
 
-                
+
                 <li>
                     <a href="#sidebarfamily" data-bs-toggle="collapse">
-                        <i class="mdi mdi-family-tree"></i>
+                        <i class="fa-solid fa-box"></i>
                         <span>Items</span>
                         <span class="menu-arrow"></span>
                     </a>

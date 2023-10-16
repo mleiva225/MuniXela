@@ -94,5 +94,6 @@
     ":model-update-success": ":model actualizado con éxito",
     ":model-delete-success": ":model eliminado con éxito",
     "format-date-desc": "El formato de fecha es: Año-mes-día",
-    "format-datetime-desc": "El formato de fecha es: Año-mes-día hora"
+    "format-datetime-desc": "El formato de fecha es: Año-mes-día hora",
+    "save": "Guardar"
 }
