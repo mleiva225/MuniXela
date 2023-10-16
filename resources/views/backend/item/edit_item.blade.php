@@ -2,6 +2,12 @@
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+    @php
+        $titleIcon = '<i class="fa-solid fa-box"></i>';
+        $returnIcon = '<i class="fa-solid fa-backward-step"></i>';
+        $saveIcon = '<i class="mdi mdi-content-save"></i>';
+    @endphp
+
     <div class="content">
 
         <!-- Start Content-->
@@ -12,12 +18,15 @@
                 <div class="col-12">
                     <div class="page-title-box">
                         <div class="page-title-right">
-                            <h4> {{ __('item') }} <i class="fa-solid fa-boxes-stacked"></i></h4>
+                            <h4> {{ __('edit-item-:attribute', ['attribute' => $item->code]) }} {!! $titleIcon !!}</h4>
                         </div>
                         <ol class="breadcrumb m-0 page-title">
-                            <li class="breadcrumb-item "><a href="{{ route('all.item') }}" class="link text-primary"><i
-                                        class="fa-solid fa-backward-step"></i> {{ __('items') }} </a></li>
-                            <li class="breadcrumb-item">{{ __('edit-item-:attribute', ['attribute' => $item->code]) }}</li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('all.item') }}"
+                                    class="btn btn-info rounded-pill waves efect waves-light">{!! $returnIcon !!}
+                                    {{ __('items') }} </a>
+                            </li>
+                            <li class="breadcrumb-item">{{ __('edit-item') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -35,9 +44,6 @@
                                     @csrf
 
                                     <input type="hidden" name="id" value="{{ $item->id }}">
-
-                                    <h5 class="mb-4 text-uppercase"><i
-                                            class="mdi mdi-account-circle me-1"></i>{{ __('edit-item') }}</h5>
 
                                     <div class="row"> <!-- init row -->
                                         <div class="col-md-4">
@@ -154,8 +160,7 @@
                                     </div> <!-- end row -->
 
                                     <div class="text-end">
-                                        <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i
-                                                class="mdi mdi-content-save"></i>Guardar</button>
+                                        <button type="submit" class="btn btn-success waves-effect waves-light mt-2">{!! $saveIcon !!} {{ __('save') }} </button>
                                     </div>
                                 </form>
 

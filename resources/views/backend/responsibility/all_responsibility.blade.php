@@ -8,11 +8,11 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.item') }}"
-                                    class="btn btn-success rounded-pill waves efect waves-light">{{ __('new-item') }}</a>
+                                <a href="{{ route('add.responsibility') }}"
+                                    class="btn btn-success rounded-pill waves efect waves-light">{{ __('new-responsibility') }}</a>
                             </ol>
                         </div>
-                        <h4 class="page-title">{{ __('list-item') }}</h4>
+                        <h4 class="page-title">{{ __('list-responsibility') }}</h4>
                     </div>
                 </div>
             </div>
@@ -30,33 +30,25 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __('no.') }}</th>
-                                        <th>{{ __('code') }}</th>
-                                        <th>{{ __('name') }}</th>
-                                        <th>{{ __('quantity') }}</th>
                                         <th>{{ __('series') }}</th>
-                                        <th>{{ __('sicoin-gl') }}</th>
                                         <th>{{ __('created-at') }}</th>
                                         <th>{{ __('actions') }} </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($items as $key => $item)
+                                    @foreach ($sheets as $key => $sheet)
                                         <tr>
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ $item->code }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->quantity }}</td>
-                                            <td>{{ $item->series }}</td>
-                                            <td>{{ $item->sicoin_gl }}</td>
-                                            <td>{{ $item->created_at }}</td>
+                                            <td>{{ $sheet->series }}</td>
+                                            <td>{{ $sheet->created_at }}</td>
                                             <td>
-                                                <a href="{{ route('view.item', $item->id) }}"
-                                                    class="btn btn-success rounded-pill waves-effect waves-light">Ver</a>
-                                                <a href="{{ route('edit.item', $item->id) }}"
-                                                    class="btn btn-blue rounded-pill waves-effect waves-light">Editar</a>
-                                                <a href="{{ route('item.delete', $item->id) }}"
+                                                <a href="{{ route('view.responsibility', $sheet->id) }}"
+                                                    class="btn btn-success rounded-pill waves-effect waves-light">{{ __('see') }}</a>
+                                                <a href="{{ route('edit.responsibility', $sheet->id) }}"
+                                                    class="btn btn-blue rounded-pill waves-effect waves-light">{{ __('edit') }}</a>
+                                                <a href="{{ route('item.delete', $sheet->id) }}"
                                                     class="btn btn-danger rounded-pill waves-effect waves-light"
-                                                    id="delete">Eliminar </a>
+                                                    id="delete">{{ __('delete') }}</a>
                                             </td>
                                         </tr>
                                     @endforeach

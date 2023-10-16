@@ -3,7 +3,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     @php
-        $titleIcon = '<i class="fa-solid fa-box"></i>';
+        $titleIcon = '<i class="fa-solid fa-clipboard-check"></i>';
         $returnIcon = '<i class="fa-solid fa-backward-step"></i>';
         $saveIcon = '<i class="mdi mdi-content-save"></i>';
     @endphp

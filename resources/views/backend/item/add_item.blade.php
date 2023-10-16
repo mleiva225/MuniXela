@@ -3,8 +3,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     @php
-        $titleIcon = '<i class="fa-solid fa-boxes-stacked"></i>';
-        $sectionIcon = '<i class="fa-solid fa-box"></i>';
+        $titleIcon = '<i class="fa-solid fa-box"></i>';
         $returnIcon = '<i class="fa-solid fa-backward-step"></i>';
         $saveIcon = '<i class="mdi mdi-content-save"></i>';
     @endphp
@@ -48,9 +47,6 @@
                             <div class="tab-pane" id="settings">
                                 <form method="post" action="{{ route('item.store') }}" enctype="multipart/form-data">
                                     @csrf
-
-                                    <h5 class="mb-4 text-uppercase">{!! $sectionIcon !!} {{ __('new-item') }}
-                                    </h5>
 
                                     <div class="row"> <!-- init row -->
                                         <div class="col-md-4">
