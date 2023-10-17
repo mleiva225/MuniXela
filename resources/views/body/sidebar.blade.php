@@ -33,12 +33,10 @@
                     </div>
                 </li>
 
-
-                
                 <li>
                     <a href="#sidebarfamily" data-bs-toggle="collapse">
-                        <i class="mdi mdi-family-tree"></i>
-                        <span>Items</span>
+                        <i class="fa-solid fa-boxes"></i>
+                        <span>{{ __('items') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarfamily">
@@ -54,43 +52,23 @@
                 </li>
 
                 <li>
-                    <a href="#sidebarmembers" data-bs-toggle="collapse">
-                        <i class="fa fa-users"></i>
-                        <span>Responsabilidades</span>
+                    <a href="#sidebarresponsibility" data-bs-toggle="collapse">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <span>{{ __('responsibilities') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarmembers">
+                    <div class="collapse" id="sidebarresponsibility">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('add.member') }}">Lista</a>
+                                <a href="{{ route('all.responsibility') }}">{{ __('list') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('all.member') }}">Asignacion</a>
+                                <a href="{{ route('add.responsibility') }}">{{ __('add-new') }}</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <li>
-                    <a href="#sidebarprograms" data-bs-toggle="collapse">
-                        <i class="dripicons-checklist"></i>
-                        <span>Reportes</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarprograms">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="">Busqueda por item</a>
-                            </li>
-                            <li>
-                                <a href="">Busqueda por Empleado</a>
-                            </li>
-                            <li>
-                                <a href="">Busqueda por dependencia</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
             </ul>
         </div>
         </li>
