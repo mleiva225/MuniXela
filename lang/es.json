@@ -116,5 +116,6 @@
     "delete": "Eliminar",
     "list": "Lista",
     "add-new": "Agregar nuevo",
-    "actions": "Acciones"
+    "actions": "Acciones",
+    "unit-value": "Valor unitario"
 }

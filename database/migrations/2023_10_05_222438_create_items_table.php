@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('series')->nullable();
             $table->string('sicoin_gl')->nullable();
             $table->text('observations')->nullable();
+            $table->float('unit_value')->nullable();
             $table->timestamps();
         });
     }

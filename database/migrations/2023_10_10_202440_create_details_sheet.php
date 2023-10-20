@@ -20,7 +20,6 @@ return new class extends Migration
             $table->float('value')->nullable();
             $table->float('low_value')->nullable();
             $table->string('created_by')->nullable();
-            $table->string('lastname');
             $table->timestamps();
         });
     }
