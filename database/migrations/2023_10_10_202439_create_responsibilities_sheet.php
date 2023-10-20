@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('responsibilities_sheet', function (Blueprint $table) {
+            // Fields
             $table->id();
+            $table->timestamps();
             $table->string('series')->nullable();
+
+            // Relations fields and relations references
             $table->unsignedBigInteger('id_responsible');
             $table->foreign('id_responsible')->references('id')->on('users')->onDelete('cascade');
+
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->string('lastname');
-            $table->timestamps();
         });
     }
 

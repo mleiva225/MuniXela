@@ -46,7 +46,7 @@
                                     <input type="hidden" name="id" value="{{ $item->id }}">
 
                                     <div class="row"> <!-- init row -->
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="code" class="form-label">{{ __('code') }}*</label>
                                                 <input type="text" name="code"
@@ -58,7 +58,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">{{ __('name') }}*</label>
                                                 <input type="text" name="name"
@@ -70,13 +70,25 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="quantity" class="form-label">{{ __('quantity') }}</label>
                                                 <input type="number" name="quantity"
                                                     class="form-control @error('quantity') is-invalid @enderror"
                                                     value="{{ $item->quantity }}" readonly>
                                                 @error('quantity')
+                                                    <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label for="unit_value" class="form-label">{{ __('unit-value') }}</label>
+                                                <input type="number" name="unit_value" step="0.0001"
+                                                    class="form-control @error('unit_value') is-invalid @enderror"
+                                                    value="{{ $item->unit_value }}" readonly>
+                                                @error('unit_value')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
                                             </div>

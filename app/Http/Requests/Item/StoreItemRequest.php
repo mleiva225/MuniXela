@@ -29,6 +29,7 @@ class StoreItemRequest extends FormRequest
             'series' => ['string', 'nullable'],
             'quantity' => ['numeric', 'nullable'],
             'sicoin_gl' => ['string', 'nullable'],
+            'unit_value' => ['numeric', 'nullable'],
             'description' => ['string', 'nullable'],
             'observations' => ['string', 'nullable'],
         ];

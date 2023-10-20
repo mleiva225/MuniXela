@@ -48,6 +48,7 @@ class ItemController extends Controller
             'series' => $request->series,
             'quantity' => $request->quantity,
             'sicoin_gl' => $request->sicoin_gl,
+            'unit_value' => $request->unit_value,
             'description' => $request->description,
             'observations' => $request->observations,
         ]);
