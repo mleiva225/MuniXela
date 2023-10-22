@@ -32,7 +32,6 @@
                                         <th>{{ __('no.') }}</th>
                                         <th>{{ __('code') }}</th>
                                         <th>{{ __('name') }}</th>
-                                        <th>{{ __('quantity') }}</th>
                                         <th>{{ __('unit-value') }}</th>
                                         <th>{{ __('series') }}</th>
                                         <th>{{ __('sicoin-gl') }}</th>
@@ -46,7 +45,6 @@
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $item->code }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->quantity }}</td>
                                             <td>Q {{ $item->unit_value }}</td>
                                             <td>{{ $item->series }}</td>
                                             <td>{{ $item->sicoin_gl }}</td>

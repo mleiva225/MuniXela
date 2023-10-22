@@ -27,7 +27,6 @@ class StoreItemRequest extends FormRequest
             'name' => ['required', 'string', 'max:150'],
             'code' => ['required', 'string', 'max:50', Rule::unique(Item::class)->ignore('code')],
             'series' => ['string', 'nullable'],
-            'quantity' => ['numeric', 'nullable'],
             'sicoin_gl' => ['string', 'nullable'],
             'unit_value' => ['numeric', 'nullable'],
             'description' => ['string', 'nullable'],
