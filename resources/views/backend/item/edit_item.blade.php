@@ -6,6 +6,9 @@
         $titleIcon = '<i class="fa-solid fa-box"></i>';
         $returnIcon = '<i class="fa-solid fa-backward-step"></i>';
         $saveIcon = '<i class="mdi mdi-content-save"></i>';
+
+        $firstSectionIcon = '<i class="fa-solid fa-box"></i>';
+        $secondSectionIcon = '<i class="fa-solid fa-user-check"></i>';
     @endphp
 
     <div class="content">
@@ -33,6 +36,7 @@
             </div>
             <!-- end page title -->
 
+            <!-- Item section -->
             <div class="row">
 
                 <div class="col-lg-8 col-xl-12">
@@ -42,6 +46,8 @@
                             <div class="tab-pane" id="settings">
                                 <form method="post" action="{{ route('item.update') }}" enctype="multipart/form-data">
                                     @csrf
+
+                                    <h5 class="mb-4 text-uppercase">{!! $firstSectionIcon !!} {{ __('item-section') }}</h5>
 
                                     <input type="hidden" name="id" value="{{ $item->id }}">
 
@@ -183,6 +189,42 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Responsible section -->
+            <div class="row">
+
+                <div class="col-lg-8 col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="tab-pane" id="settings">
+                                <form method="post" action="{{ route('item.update') }}" enctype="multipart/form-data">
+                                    @csrf
+
+                                    <h5 class="mb-4 text-uppercase">{!! $secondSectionIcon !!}
+                                        {{ __('responsible-section') }}</h5>
+
+                                    <input type="hidden" name="id_item" value="{{ '' }}">
+                                    <input type="hidden" name="id_sheet" value="{{ '' }}">
+                                    <input type="hidden" name="id_detail" value="{{ '' }}">
+
+                                    <div class="row"> <!-- init row -->
+
+                                    </div> <!-- end row -->
+
+                                    <div class="text-end">
+                                        <button type="submit"
+                                            class="btn btn-success waves-effect waves-light mt-2">{!! $saveIcon !!}
+                                            {{ __('save') }} </button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

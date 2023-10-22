@@ -117,5 +117,7 @@
     "list": "Lista",
     "add-new": "Agregar nuevo",
     "actions": "Acciones",
-    "unit-value": "Valor unitario"
+    "unit-value": "Valor unitario",
+    "responsible-section": "Sección de responsable",
+    "item-section": "Sección de item"
 }
