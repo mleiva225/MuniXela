@@ -73,9 +73,9 @@
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="quantity" class="form-label">{{ __('quantity') }}</label>
-                                                <input type="number" name="quantity"
+                                                <input type="number" name="quantity" readonly
                                                     class="form-control @error('quantity') is-invalid @enderror"
-                                                    value="{{ $item->quantity }}">
+                                                    value="1">
                                                 @error('quantity')
                                                     <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
