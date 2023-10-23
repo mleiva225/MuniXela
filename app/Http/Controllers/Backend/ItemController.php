@@ -6,6 +6,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Item\StoreItemRequest;
+use App\Http\Requests\Item\UpdateItemRequest;
 
 class ItemController extends Controller
 {
@@ -35,6 +36,7 @@ class ItemController extends Controller
     public function EditItem($id)
     {
         $item = Item::findOrFail($id);
+
         return view('backend.item.edit_item', compact('item'));
     }
 
@@ -42,7 +44,7 @@ class ItemController extends Controller
 
     public function StoreItem(StoreItemRequest $request)
     {
-        Item::create([
+        $item = Item::create([
             'name' => $request->name,
             'code' => $request->code,
             'series' => $request->series,
@@ -52,6 +54,7 @@ class ItemController extends Controller
             'description' => $request->description,
             'observations' => $request->observations,
         ]);
+        $item->generateQR();
 
         $notification = array(
             'message' => __(':model-insert-success', ['model' => __('item')]),
@@ -61,25 +64,29 @@ class ItemController extends Controller
         return redirect()->route('all.item')->with('notification', $notification);
     }
 
-    public function UpdateItem(StoreItemRequest $request)
+    public function UpdateItem(UpdateItemRequest $request)
     {
-        $item_id = $request->id;
+        $id = $request->id;
 
-        Item::findOrFail($item_id)->update([
+        $item = Item::findOrFail($id);
+
+        $item->update([
             'name' => $request->name,
             'code' => $request->code,
             'series' => $request->series,
             'sicoin_gl' => $request->sicoin_gl,
+            'unit_value' => $request->unit_value,
             'description' => $request->description,
             'observations' => $request->observations,
         ]);
+        $item->generateQR();
 
         $notification = array(
             'message' => __(':model-update-success', ['model' => __('item')]),
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.item')->with('notification', $notification);
+        return redirect()->route('edit.item', $id)->with('notification', $notification);
     }
 
     public function DeleteItem($id)
@@ -92,5 +99,12 @@ class ItemController extends Controller
         );
 
         return redirect()->route('all.item')->with('notification', $notification);
+    }
+
+    public function DownloadItemQr($id)
+    {
+        $item = Item::findOrFail($id);
+
+        return response()->download(public_path($item->getQRPath()));
     }
 }

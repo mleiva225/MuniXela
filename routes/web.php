@@ -10,6 +10,7 @@ use App\Http\Controllers\auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ItemController;
 use App\Http\Controllers\Backend\ResponsibilitySheetController;
+use App\Http\Controllers\Public\PublicItemController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::get('/logout', [AdminController::class, 'AdminLogoutPage'])->name('admin.
 Route::get('/guatemala.json', function () {
     return response()->file(public_path('guatemala.json'));
 });
+
+// De las vistas que no requieren una autenticación
+Route::get('/view/item/{id}', [PublicItemController::class, 'ViewItem'])->name('view.item');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
@@ -60,13 +64,18 @@ Route::middleware(['auth'])->group(function () {
 
     /** ========== Item Rutas  ========== */
     Route::controller(ItemController::class)->group(function () {
+        // Vistas
         Route::get('/all/item', 'AllItem')->name('all.item');
-        Route::get('/view/item/{id}', 'ViewItem')->name('view.item');
         Route::get('/add/item', 'AddItem')->name('add.item');
-        Route::post('/store/item', 'StoreItem')->name('item.store');
         Route::get('/edit/item/{id}', 'EditItem')->name('edit.item');
+        // La ruta view ahora no requiere de autenticación
+
+        // Acciones
+        Route::post('/store/item', 'StoreItem')->name('item.store');
         Route::post('/update/item', 'UpdateItem')->name('item.update');
         Route::get('/delete/item/{id}', 'DeleteItem')->name('item.delete');
+
+        Route::get('/download/item/{id}', 'DownloadItemQr')->name('item.downloadqr');
     });
 
     /** ========== Hoja de responsabilidad Rutas  ========== */
