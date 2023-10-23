@@ -3,7 +3,7 @@
 Este proyecto se realiza utilizando los siguientes aspectos:
  - **Framework:** [Página de Laravel](https://laravel.com)
  - **Librería 1:** [Página de Bootstrap](https://getbootstrap.com)
- - **Librería 2 (para generar QR):** [Página de simple-qrcode](https://php-qrcode.readthedocs.io/en/main/)
+ - **Librería 2 (para generar QR):** [Página de PHP-QRCode](https://php-qrcode.readthedocs.io/en/main/)
 
  # Para una correcta instalación de desarrollo (Windows)
 Partiendo del hecho de tener instalado PHP (Puede ser con XAMPP, pero deben poseer el path configurado), Composer, NPM, MySQL (Puede ser con XAMPP), se deben serguir los siguientes pasos:
