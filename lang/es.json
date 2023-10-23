@@ -89,6 +89,7 @@
     "view-item": "Ver Item",
     "view-item-:attribute": "Item (:attribute)",
     "edit-item-:attribute": "Editar Item (:attribute)",
+    "qr-item-:attribute": "QR del Item (:attribute)",
     "items": "Items",
     "item": "Item",
     "sheet": "Hoja",
@@ -119,5 +120,9 @@
     "actions": "Acciones",
     "unit-value": "Valor unitario",
     "responsible-section": "Sección de responsable",
-    "item-section": "Sección de item"
+    "item-section": "Sección de item",
+    "general-data": "Principal",
+    "item-qr": "QR de item",
+    "download": "Descargar",
+    "log-in": "Iniciar Sesión"
 }

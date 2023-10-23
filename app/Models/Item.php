@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use chillerlan\QRCode\{QRCode, QROptions};
+use Intervention\Image\Facades\Image;
+
 /**
  * @property int id
  * @property ?float quantity
@@ -23,4 +26,29 @@ class Item extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function generateQR()
+    {
+        $options = new QROptions;
+
+        $options->outputType          = QRCode::OUTPUT_IMAGE_JPG;
+        $options->scale               = 10;
+        $options->jpegQuality         = 100;
+        $options->outputBase64        = false;
+        $options->bgColor             = [200, 150, 200];
+        $options->imageTransparent    = true;
+
+        $options->drawCircularModules = true;
+        $options->drawLightModules    = true;
+        $options->circleRadius        = 0.4;
+
+        $QR = (new QRCode($options))->render(route('view.item', $this->id));
+
+        Image::make($QR)->save($this->getQRPath());
+    }
+
+    public function getQRPath(): string
+    {
+        return 'generate/qr/item ' . $this->code . '.jpg';
+    }
 }

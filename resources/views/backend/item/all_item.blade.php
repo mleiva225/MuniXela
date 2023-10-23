@@ -50,8 +50,6 @@
                                             <td>{{ $item->sicoin_gl }}</td>
                                             <td>{{ $item->created_at }}</td>
                                             <td>
-                                                <a href="{{ route('view.item', $item->id) }}"
-                                                    class="btn btn-success rounded-pill waves-effect waves-light">Ver</a>
                                                 <a href="{{ route('edit.item', $item->id) }}"
                                                     class="btn btn-blue rounded-pill waves-effect waves-light">Editar</a>
                                                 <a href="{{ route('item.delete', $item->id) }}"
