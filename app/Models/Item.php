@@ -51,4 +51,15 @@ class Item extends Model
     {
         return 'generate/qr/item ' . $this->code . '.jpg';
     }
+
+    public function sheetsdetail(){
+        return $this->belongsTo(DetailResponsibilitySheet::class, 'id', 'id_item')
+                    ->join('responsibility_sheets', 'detail_responsibility_sheets.id_responsibilitysheet', '=', 'responsibility_sheets.id');
+    }
+
+    public function detail(){
+        return $this->belongsTo(DetailResponsibilitySheet::class,'id', 'id_item');
+    }
+
+
 }
