@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ItemController;
 use App\Http\Controllers\Backend\ResponsibilitySheetController;
 use App\Http\Controllers\Public\PublicItemController;
+use App\Http\Controllers\Backend\OrderController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -82,13 +83,31 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ResponsibilitySheetController::class)->group(function () {
         // Vistas
         Route::get('/all/responsibility', 'AllResponsibility')->name('all.responsibility');
-        Route::get('/add/responsibility', 'AddResponsibility')->name('add.responsibility');
+        Route::get('/add/responsibility', 'Pos')->name('add.responsibility');
         Route::get('/edit/responsibility/{id}', 'EditResponsibility')->name('edit.responsibility');
         Route::get('/view/responsibility/{id}', 'ViewResponsibility')->name('view.responsibility');
+        Route::get('/delete/responsibility/{id}', 'DeleteResponsibility')->name('responsibility.delete');
 
         // Acciones
         Route::post('/store/responsibility', 'StoreResponsibility')->name('responsibility.store');
         Route::post('/update/responsibility', 'UpdateResponsibility')->name('responsibility.update');
         Route::get('/delete/responsibility/{id}', 'DeleteResponsibility')->name('responsibility.delete');
+        Route::post('/add-cart', 'AddCart');
+        Route::get('/allitem', 'AllItem');
+        Route::post('/cart-update/{rowId}', 'CartUpdate');
+        Route::get('/cart-remove/{rowId}', 'CartRemove');
+        Route::post('/create-invoice', 'CreateInvoice');
     });
+
+        /** ========== Responsabilidad Rutas  ========== */
+        Route::controller(OrderController::class)->group(function(){
+            Route::post('/final-invoice','FinalInvoice');
+            Route::get('/pending/order','PendingOrder')->name('pending.order');
+            Route::get('/order/details/{order_id}','OrderDetails')->name('order.details');
+            Route::post('/order/status/update','OrderStatusUpdate')->name('order.status.update');
+            Route::get('/complete/order','CompleteOrder')->name('complete.order');
+            Route::get('/stock','StockManage')->name('stock.manage');
+           });
+
+
 }); // End Middleware 

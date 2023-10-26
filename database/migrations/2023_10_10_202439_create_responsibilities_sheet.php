@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('responsibilities_sheet', function (Blueprint $table) {
+        Schema::create('responsibility_sheets', function (Blueprint $table) {
             // Fields
             $table->id();
             $table->timestamps();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('responsibilities_sheet');
+        Schema::dropIfExists('responsibility_sheets');
     }
 };

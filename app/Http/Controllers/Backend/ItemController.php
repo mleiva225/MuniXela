@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Item;
+use App\Models\User;
+use App\Models\ResponsibilitySheet;
+use App\Models\DetailResponsibilitySheet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Item\StoreItemRequest;
@@ -36,8 +39,10 @@ class ItemController extends Controller
     public function EditItem($id)
     {
         $item = Item::findOrFail($id);
-
-        return view('backend.item.edit_item', compact('item'));
+        $item->load('sheetsdetail');
+        $users = User::all();
+        $responsibility_sheets = ResponsibilitySheet::all();
+        return view('backend.item.edit_item', compact('item', 'users', 'responsibility_sheets'));
     }
 
     /** ============================== ACCIONES ============================== */
@@ -79,6 +84,15 @@ class ItemController extends Controller
             'description' => $request->description,
             'observations' => $request->observations,
         ]);
+
+        $detailResponsibilitySheet = $item->detail;
+
+        $detailsheet = DetailResponsibilitySheet::findOrFail($detailResponsibilitySheet->id);
+        $detailsheet->update([
+        'id_responsibilitysheet' => $request->sheet_series,
+        ]);
+
+
         $item->generateQR();
 
         $notification = array(
