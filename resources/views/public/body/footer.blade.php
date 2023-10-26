@@ -1,4 +1,4 @@
-<footer class="text-center fixed-bottom footer-public">
+<footer class="text-center bottom footer-public">
     <div class="container p-3">
         <div>
             <script>

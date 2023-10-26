@@ -3,6 +3,9 @@
     @php
         $titleIcon = '<i class="fa-solid fa-box"></i>';
         $saveIcon = '<i class="mdi mdi-content-save"></i>';
+
+        $firstSectionIcon = '<i class="fa-solid fa-box"></i>';
+        $secondSectionIcon = '<i class="fa-solid fa-user-check"></i>';
     @endphp
 
     <div class="content">
@@ -33,6 +36,11 @@
                         <div class="card-body">
 
                             <div class="tab-pane" id="settings">
+
+                                <h5 class="mb-4 text-uppercase text-primary">{!! $firstSectionIcon !!}
+                                    {{ __('item-section') }}
+                                </h5>
+
                                 <input type="hidden" name="id" value="{{ $item->id }}">
 
                                 <div class="row"> <!-- init row -->
@@ -158,6 +166,42 @@
                                     </div>
 
                                 </div> <!-- end row -->
+
+                                <div class="row"> <!-- start row -->
+                                    <h5 class="mb-4 text-uppercase text-primary">{!! $secondSectionIcon !!}
+                                        {{ __('responsible-section') }}
+                                    </h5>
+
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Serie de hoja actual*</label>
+                                            <select name="sheet_series" class="form-control @error('sheet_series') is-invalid @enderror" readonly>
+                                                <option value="ninguno" {{ old('sheet_series', optional($item->sheetsdetail)->series) == 'ninguno' ? 'selected' : '' }}>Ninguno</option>
+                                                @foreach ($responsibility_sheets as $responsibility_sheet)
+                                                <option value="{{ $responsibility_sheet->id }}" {{ old('sheet_series', optional($item->sheetsdetail)->series) == $responsibility_sheet->series ? 'selected' : '' }}>
+                                                    {{ $responsibility_sheet->series }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('sheet_series')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Responsable actual</label>
+                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ optional($users->find(optional($item->sheetsdetail)->id_responsible))->name ?? '' }}" readonly>
+                                            @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                </div><!-- end row -->
 
                             </div>
                         </div>
