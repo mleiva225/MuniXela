@@ -3,13 +3,39 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Faker\Generator;
 use Illuminate\Database\Seeder;
-
-// Needed for random values
-use Illuminate\Support\Str;
+use Illuminate\Container\Container;
 
 class UserSeeder extends Seeder
 {
+    /**
+     * The current Faker instance.
+     *
+     * @var \Faker\Generator
+     */
+    protected $faker;
+
+    /**
+     * Create a new seeder instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->faker = $this->withFaker();
+    }
+
+    /**
+     * Get a new Faker instance.
+     *
+     * @return \Faker\Generator
+     */
+    protected function withFaker()
+    {
+        return Container::getInstance()->make(Generator::class);
+    }
+
     /**
      * Run the database seeds.
      */
@@ -26,18 +52,19 @@ class UserSeeder extends Seeder
 
         // Create 20 random users
         for ($i = 0; $i < 20; $i++) {
-            $this->CreateRandomUser($i);
+            $this->CreateRandomUser();
         }
     }
 
-    private function CreateRandomUser(int $index)
+    private function CreateRandomUser()
     {
         User::factory()->create([
-            'phone' => 'user-' . ++$index,
-            'name' => Str::random(4),
-            'lastname' => Str::random(8),
-            'email' => Str::random(8) . '@random.com',
-            'admin' => true
+            'phone' => $this->faker->phoneNumber,
+            'name' => $this->faker->name,
+            'lastname' => $this->faker->lastName,
+            'email' => $this->faker->email,
+            'admin' => true,
+            'birthdate' => $this->faker->dateTimeBetween('01-01-1995', '31-12-2005')
         ]);
     }
 }
