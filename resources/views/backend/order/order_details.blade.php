@@ -4,7 +4,7 @@
 <style>
     .firma-column {
         display: inline-block;
-        width: 49%; /* Puedes ajustar el ancho según tus necesidades */
+        width: 49%;
         margin-top: 50px;
     }
 </style>
