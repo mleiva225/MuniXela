@@ -17,7 +17,7 @@
                                         class="fa-solid fa-backward-step"></i>
                                     {{ __('Collaborators') }} </a>
                             </li>
-                            <li class="breadcrumb-item">{{ __('New Collaborator') }}</li>
+                            <li class="breadcrumb-item">{{ __('New collaborator') }}</li>
                         </ol>
                     </div>
                 </div>
