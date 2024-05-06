@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('observations_sheet', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_sheet');
-            $table->foreign('id_sheet')->references('id')->on('responsibilities_sheet')->onDelete('cascade');
             $table->text('observation')->nullable();
             $table->timestamps();
+            
+            $table->foreign('id_sheet')->references('id')->on('responsibility_sheets')->onDelete('cascade');
         });
     }
 
