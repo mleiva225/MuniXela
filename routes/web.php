@@ -7,6 +7,7 @@ require_once __DIR__ . '/auth.php';
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\auth\AuthenticatedSessionController;
+use App\Http\Controllers\Backend\DependenceController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ItemController;
 use App\Http\Controllers\Backend\ResponsibilitySheetController;
@@ -56,6 +57,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete/user/{id}', 'DeleteUser')->name('delete.user');
     });
 
+    /** ========== Dependencia rutas  ========== */
+    Route::controller(DependenceController::class)->group(function () {
+        // Vistas
+        Route::get('/all/dependence', 'AllItem')->name('all.dependence');
+        Route::get('/add/dependence', 'AddItem')->name('add.dependence');
+        Route::get('/edit/dependence/{id}', 'EditItem')->name('edit.dependence');
+
+        // Acciones
+        Route::post('/store/dependence', 'StoreDependence')->name('dependence.store');
+        Route::post('/update/dependence', 'UpdateDependence')->name('dependence.update');
+        Route::get('/delete/dependence/{id}', 'DeleteDependence')->name('dependence.delete');
+    });
+
     /** ========== Editar usuario rutas  ========== */
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'edit')->name('profile.edit');
@@ -99,15 +113,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/create-invoice', 'CreateInvoice');
     });
 
-        /** ========== Responsabilidad Rutas  ========== */
-        Route::controller(OrderController::class)->group(function(){
-            Route::post('/final-invoice','FinalInvoice');
-            Route::get('/pending/order','PendingOrder')->name('pending.order');
-            Route::get('/order/details/{order_id}','OrderDetails')->name('order.details');
-            Route::post('/order/status/update','OrderStatusUpdate')->name('order.status.update');
-            Route::get('/complete/order','CompleteOrder')->name('complete.order');
-            Route::get('/stock','StockManage')->name('stock.manage');
-           });
-
-
+    /** ========== Responsabilidad Rutas  ========== */
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('/final-invoice', 'FinalInvoice');
+        Route::get('/pending/order', 'PendingOrder')->name('pending.order');
+        Route::get('/order/details/{order_id}', 'OrderDetails')->name('order.details');
+        Route::post('/order/status/update', 'OrderStatusUpdate')->name('order.status.update');
+        Route::get('/complete/order', 'CompleteOrder')->name('complete.order');
+        Route::get('/stock', 'StockManage')->name('stock.manage');
+    });
 }); // End Middleware 
