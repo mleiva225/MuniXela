@@ -149,5 +149,10 @@
     "Status": "Estado",
     "Admin": "Administrativo",
     "Image": "Imagen",
-    "Are the user admin?": "¿Es un usuario administrativo?"
+    "Are the user admin?": "¿Es un usuario administrativo?",
+    "Dependences": "Dependencias",
+    "Add Dependence": "Agregar Dependencia",
+    "Edit Dependence": "Editar Dependencia",
+    "View Dependence": "Ver Dependencia",
+    "New Dependence": "Nueva Dependencia"
 }

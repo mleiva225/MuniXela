@@ -17,83 +17,55 @@ class DependenceController extends Controller
         return view('backend.dependence.all_dependence', compact('dependences'));
     }
 
-    public function ViewDependence($id)
-    {
-        $dependence = Dependence::findOrFail($id);
-
-        return view('backend.Dependence.view_Dependence', compact('dependence'));
-    }
-
     public function AddDependence()
     {
-        return view('backend.Dependence.add_dependence');
+        return view('backend.dependence.add_dependence');
     }
 
     public function EditDependence($id)
     {
-        $Dependence = Dependence::findOrFail($id);
-        $Dependence->load('sheetsdetail');
-        $users = User::all();
-        $responsibility_sheets = ResponsibilitySheet::all();
-        return view('backend.Dependence.edit_Dependence', compact('Dependence', 'users', 'responsibility_sheets'));
+        $dependence = Dependence::findOrFail($id);
+        return view('backend.dependence.edit_dependence', compact('dependence'));
     }
 
     /** ============================== ACCIONES ============================== */
 
-    public function StoreDependence(StoreDependenceRequest $request)
+    public function StoreDependence(Request $request)
     {
-        $Dependence = Dependence::create([
-            'name' => $request->name,
-            'code' => $request->code,
-            'series' => $request->series,
-            'quantity' => 1,
-            'sicoin_gl' => $request->sicoin_gl,
-            'unit_value' => $request->unit_value,
-            'description' => $request->description,
-            'observations' => $request->observations,
+        $request->validate([
+            'name' => 'required',
         ]);
-        $Dependence->generateQR();
+
+        Dependence::create([
+            'name' => $request->name
+        ]);
 
         $notification = array(
             'message' => __(':model-insert-success', ['model' => __('Dependence')]),
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.Dependence')->with('notification', $notification);
+        return redirect()->route('all.dependence')->with('notification', $notification);
     }
 
-    public function UpdateDependence(UpdateDependenceRequest $request)
+    public function UpdateDependence(Request $request)
     {
-        $id = $request->id;
-
-        $Dependence = Dependence::findOrFail($id);
-
-        $Dependence->update([
-            'name' => $request->name,
-            'code' => $request->code,
-            'series' => $request->series,
-            'sicoin_gl' => $request->sicoin_gl,
-            'unit_value' => $request->unit_value,
-            'description' => $request->description,
-            'observations' => $request->observations,
+        $request->validate([
+            'name' => 'required',
         ]);
 
-        $detailResponsibilitySheet = $Dependence->detail;
+        $dependence = Dependence::findOrFail($request->id);
 
-        $detailsheet = DetailResponsibilitySheet::findOrFail($detailResponsibilitySheet->id);
-        $detailsheet->update([
-            'id_responsibilitysheet' => $request->sheet_series,
+        $dependence->update([
+            'name' => $request->name
         ]);
-
-
-        $Dependence->generateQR();
 
         $notification = array(
             'message' => __(':model-update-success', ['model' => __('Dependence')]),
             'alert-type' => 'success'
         );
 
-        return redirect()->route('edit.Dependence', $id)->with('notification', $notification);
+        return redirect()->route('edit.dependence', $request->id)->with('notification', $notification);
     }
 
     public function DeleteDependence($id)
@@ -105,13 +77,6 @@ class DependenceController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.Dependence')->with('notification', $notification);
-    }
-
-    public function DownloadDependenceQr($id)
-    {
-        $Dependence = Dependence::findOrFail($id);
-
-        return response()->download(public_path($Dependence->getQRPath()));
+        return redirect()->route('all.dependence')->with('notification', $notification);
     }
 }

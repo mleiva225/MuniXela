@@ -60,9 +60,9 @@ Route::middleware(['auth'])->group(function () {
     /** ========== Dependencia rutas  ========== */
     Route::controller(DependenceController::class)->group(function () {
         // Vistas
-        Route::get('/all/dependence', 'AllItem')->name('all.dependence');
-        Route::get('/add/dependence', 'AddItem')->name('add.dependence');
-        Route::get('/edit/dependence/{id}', 'EditItem')->name('edit.dependence');
+        Route::get('/all/dependence', 'AllDependence')->name('all.dependence');
+        Route::get('/add/dependence', 'AddDependence')->name('add.dependence');
+        Route::get('/edit/dependence/{id}', 'EditDependence')->name('edit.dependence');
 
         // Acciones
         Route::post('/store/dependence', 'StoreDependence')->name('dependence.store');
