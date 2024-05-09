@@ -16,6 +16,24 @@
                 <li class="menu-title mt-2">Aplicaciones</li>
 
                 <li>
+                    <a href="#sidebardependencies" data-bs-toggle="collapse">
+                        <i class="mdi mdi-package"></i>
+                        <span>{{ __('Dependences') }}</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebardependencies">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.dependence') }}">{{ __('list') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.dependence') }}">{{ __('Add New') }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
                     <a href="#sidebarcollaborators" data-bs-toggle="collapse">
                         <i class="mdi mdi-badge-account-outline"></i>
                         <span>Usuarios</span>
